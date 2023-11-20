@@ -3,6 +3,7 @@ import logging
 import click
 import torch
 import utils
+import textwrap
 from langchain.chains import RetrievalQA
 from langchain.embeddings import HuggingFaceInstructEmbeddings
 from langchain.llms import HuggingFacePipeline
@@ -257,7 +258,12 @@ def main(device_type, show_sources, use_history, model_type, save_qa):
         print("\n\n> Question:")
         print(query)
         print("\n> Answer:")
-        print(answer)
+        line_breaker = textwrap.TextWrapper(width=100)
+        lines = line_breaker(text = answer)
+        # Print the formatted result
+        for line in lines:
+                print(line)
+        # print(answer)
 
         if show_sources:  # this is a flag that you can set to disable showing answers.
             # # Print the relevant sources used for the answer
